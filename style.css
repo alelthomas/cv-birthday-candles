@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-title {
+  font-size: 2rem;
+  color: #051fc2;
+  font-family: "Pixelify Sans", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.webcam {
+  position: relative;
+  width: 300px;
+  height: 225px;
+}
+
+#webcam {
+  display: none;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+}
+
+.cake-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  margin-top: -2rem;
+}
+
+.cake-bg {
+  position: absolute;
+  width: 300px;
+}
+
+.cake {
+  position: absolute;
+  width: 100px;
+}
+
+.match {
+  position: absolute;
+  width: 40px;
+  pointer-events: none;
+  transition: left 0.05s ease-out, top 0.05s ease-out;
+  z-index: 10;
+}
+
+.instructions {
+  font-size: 0.6rem;
+  color: #051fc2;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+}
+
+.signature {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+  font-size: 0.6rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+// Confetti
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.confetti {
+  position: absolute;
+  top: -50px;
+  font-size: 1.2rem;
+  color: #051fc2;
+  opacity: 0;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(27vh) translateX(var(--sway, 20px)) rotate(180deg);
+  }
+  50% {
+    transform: translateY(55vh) translateX(calc(var(--sway, 20px) * -0.5))
+      rotate(360deg);
+  }
+  75% {
+    transform: translateY(82vh) translateX(var(--sway, 20px)) rotate(540deg);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(0) rotate(720deg);
+    opacity: 0;
+  }
+}
