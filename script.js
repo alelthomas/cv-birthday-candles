@@ -6,8 +6,9 @@ const cakeArea = document.querySelector(".cake-area");
 const cakeImg = document.querySelector(".cake");
 
 // Constants
-const WEBCAM_WIDTH = 300;
-const WEBCAM_HEIGHT = 225;
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const WEBCAM_WIDTH = isMobile ? 240 : 300;
+const WEBCAM_HEIGHT = isMobile ? 180 : 225;
 const BLOW_THRESHOLD = 70; // how sensitive the mic is
 const LIGHT_DISTANCE = 20; // how close match needs to be to light candles
 
@@ -29,9 +30,9 @@ const hands = new Hands({
 
 hands.setOptions({
   maxNumHands: 1,
-  modelComplexity: 1,
-  minDetectionConfidence: 0.7,
-  minTrackingConfidence: 0.5,
+  modelComplexity: isMobile ? 0 : 1,
+  minDetectionConfidence: isMobile ? 0.6 : 0.7,
+  minTrackingConfidence: isMobile ? 0.4 : 0.5,
 });
 
 // Hand tracking
@@ -246,5 +247,18 @@ function startHandTracking() {
 
 window.addEventListener("DOMContentLoaded", () => {
   initCamera();
-  initBlowDetection();
+
+  if (isMobile) {
+    document.body.addEventListener(
+      "click",
+      () => {
+        if (!audioContext) {
+          initBlowDetection();
+        }
+      },
+      { once: true }
+    );
+  } else {
+    initBlowDetection();
+  }
 });
